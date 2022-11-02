@@ -1,5 +1,8 @@
+package models;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.net.Urls;
 
 public class PersonalAccountPageModel extends PageModel {
     private final By orderLink = By.xpath(".//p[text()=\"Конструктор\"]");
@@ -23,6 +26,6 @@ public class PersonalAccountPageModel extends PageModel {
     }
 
     protected String getUrl() {
-        return "https://stellarburgers.nomoreparties.site/account/profile";
+        return UrlsConstants.personalAccountUrl;
     }
 }

@@ -1,31 +1,20 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import models.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.Collection;
 
 public class LoginTest {
     private WebDriver driver;
-    private String email;
-    private final String password = "somepassword";
+    private User user;
 
     @Before
     public void startUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        RegisterPageModel registerPageModel = new RegisterPageModel(driver);
-        registerPageModel.navigate();
-
-        email = String.format("a%s@gmail.com", java.util.UUID.randomUUID());
-        registerPageModel.register("Somename", email, password);
-
-        new WebDriverWait(driver, Duration.ofSeconds(3));
+        user = UserOperations.createUser();
     }
 
     @Test
@@ -33,7 +22,7 @@ public class LoginTest {
         LoginPageModel loginPageModel = new LoginPageModel(driver);
         loginPageModel.navigate();
 
-        loginPageModel.login(email, password);
+        loginPageModel.login(user.getEmail(), user.getPassword());
 
         OrderPageModel orderPageModel = new OrderPageModel(driver);
         orderPageModel.validateIsOnPage();
@@ -45,7 +34,7 @@ public class LoginTest {
         LoginPageModel loginPageModel = new LoginPageModel(driver);
         loginPageModel.navigate();
 
-        loginPageModel.login(email, "incorrectpassword");
+        loginPageModel.login(user.getEmail(), "incorrectpassword");
         loginPageModel.validateIsOnPage();
     }
 
@@ -58,7 +47,7 @@ public class LoginTest {
         LoginPageModel loginPageModel = new LoginPageModel(driver);
         loginPageModel.validateIsOnPage();
 
-        loginPageModel.login(email, password);
+        loginPageModel.login(user.getEmail(), user.getPassword());
 
         orderPageModel.validateIsOnPage();
         orderPageModel.validateOrderButtonVisible();
@@ -73,7 +62,7 @@ public class LoginTest {
         LoginPageModel loginPageModel = new LoginPageModel(driver);
         loginPageModel.validateIsOnPage();
 
-        loginPageModel.login(email, password);
+        loginPageModel.login(user.getEmail(), user.getPassword());
 
         orderPageModel.validateIsOnPage();
     }
@@ -87,7 +76,7 @@ public class LoginTest {
         LoginPageModel loginPageModel = new LoginPageModel(driver);
         loginPageModel.validateIsOnPage();
 
-        loginPageModel.login(email, password);
+        loginPageModel.login(user.getEmail(), user.getPassword());
 
         OrderPageModel orderPageModel = new OrderPageModel(driver);
         orderPageModel.validateIsOnPage();
@@ -102,7 +91,7 @@ public class LoginTest {
         LoginPageModel loginPageModel = new LoginPageModel(driver);
         loginPageModel.validateIsOnPage();
 
-        loginPageModel.login(email, password);
+        loginPageModel.login(user.getEmail(), user.getPassword());
 
         OrderPageModel orderPageModel = new OrderPageModel(driver);
         orderPageModel.validateIsOnPage();
@@ -110,6 +99,7 @@ public class LoginTest {
 
     @After
     public void cleanUp() {
+        UserOperations.deleteUser(user);
         driver.quit();
     }
 }

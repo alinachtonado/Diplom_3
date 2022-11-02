@@ -1,5 +1,8 @@
+package models;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.net.Urls;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -7,16 +10,16 @@ import java.time.Duration;
 
 public class OrderPageModel extends PageModel {
 
-    private final By personalAreaLink = By.xpath(".//p[text()=\"Личный Кабинет\"]");
+    private final By personalAreaLink = By.xpath(".//a[p[text()=\"Личный Кабинет\"]]");
     private final By enterAccountButton = By.xpath(".//button[text()=\"Войти в аккаунт\"]");
 
-    private final By bunsTabHeader = By.xpath(".//span[text()=\"Булки\"]");
-    private final By sauceTabHeader = By.xpath(".//span[text()=\"Соусы\"]");
-    private final By ingridientsTabHeader = By.xpath(".//span[text()=\"Начинки\"]");
+    private final By bunsTabHeader = By.xpath(".//div[span[text()=\"Булки\"]]");
+    private final By sauceTabHeader = By.xpath(".//div[span[text()=\"Соусы\"]]");
+    private final By ingridientsTabHeader = By.xpath(".//div[span[text()=\"Начинки\"]]");
 
-    private final By bunsLabel = By.xpath(".//p[text()=\"Флюоресцентная булка R2-D3\"]");
-    private final By sauceLabel = By.xpath(".//p[text()=\"Соус Spicy-X\"]");
-    private final By ingridientLabel = By.xpath(".//p[text()=\"Мясо бессмертных моллюсков Protostomia\"]");
+    private final By bunsTabSelectedHeader = By.xpath(".//div[span[text()=\"Булки\"]][contains(@class, 'tab_tab_type_current')]");
+    private final By sauceTabSelectedHeader = By.xpath(".//div[span[text()=\"Соусы\"]][contains(@class, 'tab_tab_type_current')]");
+    private final By ingridientsTabSelectedHeader = By.xpath(".//div[span[text()=\"Начинки\"]][contains(@class, 'tab_tab_type_current')]");
 
     private final By orderButton = By.xpath(".//button[text()=\"Оформить заказ\"]");
 
@@ -44,19 +47,19 @@ public class OrderPageModel extends PageModel {
         driver.findElement(sauceTabHeader).click();
     }
 
-    public void validateBunsVisible() {
+    public void validateBunsSelected() {
         new WebDriverWait(driver, Duration.ofSeconds(2))
-                .until(ExpectedConditions.visibilityOfElementLocated(bunsLabel));
+                .until(ExpectedConditions.visibilityOfElementLocated(bunsTabSelectedHeader));
     }
 
-    public void validateSauceVisible() {
+    public void validateSauceSelected() {
         new WebDriverWait(driver, Duration.ofSeconds(2))
-                .until(ExpectedConditions.visibilityOfElementLocated(sauceLabel));
+                .until(ExpectedConditions.visibilityOfElementLocated(sauceTabSelectedHeader));
     }
 
-    public void validateIngridientsVisible() {
+    public void validateIngridientsSelected() {
         new WebDriverWait(driver, Duration.ofSeconds(2))
-                .until(ExpectedConditions.visibilityOfElementLocated(ingridientLabel));
+                .until(ExpectedConditions.visibilityOfElementLocated(ingridientsTabSelectedHeader));
     }
 
     public void validateOrderButtonVisible(){
@@ -65,6 +68,6 @@ public class OrderPageModel extends PageModel {
     }
 
     protected String getUrl() {
-        return "https://stellarburgers.nomoreparties.site/";
+        return UrlsConstants.orderUrl;
     }
 }

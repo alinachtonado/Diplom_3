@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import models.OrderPageModel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class OrderPageTest {
 
         orderPageModel.clickOnBunsHeader();
 
-        orderPageModel.validateBunsVisible();
+        orderPageModel.validateBunsSelected();
     }
 
     @Test
@@ -40,7 +41,7 @@ public class OrderPageTest {
 
         orderPageModel.clickOnSauceHeader();
 
-        orderPageModel.validateSauceVisible();
+        orderPageModel.validateSauceSelected();
     }
 
     @Test
@@ -50,7 +51,7 @@ public class OrderPageTest {
 
         orderPageModel.clickOnIngridientsHeader();
 
-        orderPageModel.validateIngridientsVisible();
+        orderPageModel.validateIngridientsSelected();
     }
 
     @After

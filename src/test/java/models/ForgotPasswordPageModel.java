@@ -1,6 +1,9 @@
+package models;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.net.Urls;
 
 import static org.hamcrest.CoreMatchers.endsWith;
 
@@ -22,6 +25,6 @@ public class ForgotPasswordPageModel extends PageModel {
     }
 
     protected String getUrl() {
-        return "https://stellarburgers.nomoreparties.site/forgot-password";
+        return UrlsConstants.forgotPasswordUrl;
     }
 }
