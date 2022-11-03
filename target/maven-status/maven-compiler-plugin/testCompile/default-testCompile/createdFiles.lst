@@ -1,0 +1,10 @@
+RegisterPageModel.class
+LoginPageModel.class
+RegistrationTest.class
+ForgotPasswordPageModel.class
+PageModel.class
+PersonalAccountPageModel.class
+PersonalAccountTest.class
+LoginTest.class
+OrderPageModel.class
+OrderPageTest.class
