@@ -12,4 +12,10 @@ public class UrlsConstants {
     public static final String personalAccountUrl = baseUrl + "account/profile";
 
     public static final String registerUrl = baseUrl + "register";
+
+    public static final String registrationApiUrl =  baseUrl + "api/auth/register";
+
+    public static final String loginApiUrl = baseUrl + "api/auth/login";
+
+    public static final String deleteUserApiUrl = baseUrl + "api/auth/user";
 }

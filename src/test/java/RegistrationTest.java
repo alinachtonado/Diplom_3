@@ -38,7 +38,6 @@ public class RegistrationTest {
         String email = String.format("a%s@gmail.com", java.util.UUID.randomUUID());
         user = new User(email, "bad", "somename");
         pageModel.register(user.getName(), user.getEmail(), user.getPassword());
-
         pageModel.validatePasswordError();
         user = null;
     }

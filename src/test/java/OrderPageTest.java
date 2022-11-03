@@ -21,13 +21,13 @@ public class OrderPageTest {
     }
 
     @Test
-    public void bunsTabTest(){
+    public void bunsTabTest() throws InterruptedException {
         OrderPageModel orderPageModel = new OrderPageModel(driver);
         orderPageModel.navigate();
 
         orderPageModel.clickOnIngridientsHeader();
 
-        new WebDriverWait(driver, Duration.ofSeconds(1));
+        Thread.sleep(1000);
 
         orderPageModel.clickOnBunsHeader();
 

@@ -10,22 +10,21 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class UserOperations{
+
     public static User createUser(){
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
         User user = User.createRandomUser();
 
         given()
                 .header("Content-type", "application/json")
                 .body(user)
                 .when()
-                .post("/api/auth/register")
+                .post(UrlsConstants.registrationApiUrl)
                 .then()
                 .statusCode(200);
         return user;
     }
 
     public static Response loginUser(User user){
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
         Map<String, String> body = new HashMap<String, String>();
         body.put("email", user.getEmail());
         body.put("password", user.getPassword());
@@ -33,11 +32,10 @@ public class UserOperations{
                 .header("Content-type", "application/json")
                 .body(body)
                 .when()
-                .post("/api/auth/login");
+                .post(UrlsConstants.loginApiUrl);
     }
 
     public static String loginUserAndGetAccessToken(User user){
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
         var response = loginUser(user);
         response.then().assertThat().statusCode(200);
         JSONObject jsonObject = new JSONObject(response.getBody().asString());
@@ -54,12 +52,11 @@ public class UserOperations{
     }
 
     public static void deleteUserByToken(String accessToken) {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
         given()
                 .header("Content-type", "application/json")
                 .header("Authorization", accessToken)
                 .when()
-                .delete("/api/auth/user")
+                .delete(UrlsConstants.deleteUserApiUrl)
                 .then()
                 .statusCode(202);
     }
